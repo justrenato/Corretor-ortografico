@@ -1,3 +1,4 @@
+<<<<<<< 6147b6d36c795a7cd5e26f61853bfd0290b0545e
 Ao verme
 que
 primeiro roeu as frias carnes
@@ -2819,3 +2820,5 @@ Este último capítulo é todo de negativas. Não alcancei a celebridade do emplasto
  
  
 FIM
+=======
+>>>>>>> apanhando do bsearch =/

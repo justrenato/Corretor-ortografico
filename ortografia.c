@@ -1,3 +1,4 @@
+// ver wchar_t
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -23,6 +24,7 @@ int main()
 {
 	FILE *dicionario;
 	dicionario = fopen ("/usr/share/dict/brazilian", "r") ;
+<<<<<<< 6147b6d36c795a7cd5e26f61853bfd0290b0545e
 	// if(!dicionario) printf("Arquivo nao aberto\n"); else{ printf("Arquivo aberto\n");} //saber se dicionario foi aberto
 
 
@@ -30,6 +32,16 @@ int main()
 	int numElem=0;
 	c=getc(dicionario);
 	while((c!=255)&&(c!=-1)) { //calcula numero de caracteres do dicionario
+=======
+	if(!dicionario) {
+		perror("Arquivo nao aberto: "); //saber se dicionario foi aberto
+		exit(1);
+	}	
+	char palavra[50];
+	int numElem=0;
+	c=getc(dicionario);
+	while(/*(c!=255)&&(c!=-1)*/!feof(dicionario)) { //calcula numero de caracteres do dicionario
+>>>>>>> apanhando do bsearch =/
 		numElem++;
 		c=getc(dicionario);
 	}
