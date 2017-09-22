@@ -7,6 +7,11 @@
 
 unsigned char c; // se usar apenas char, nao identifica letras acentuadas :(
 
+int compareints (const void * a, const void * b)
+{
+  return ( *(int*)a - *(int*)b );
+}
+
 int ehletra(){
 	return( ((c>64)&&(c<91)) || //igual de maiusculas ou
 	 		((c>96)&&(c<123)) || //igual de minusculas ou
@@ -24,11 +29,11 @@ int main()
 {
 	FILE *dicionario;
 	dicionario = fopen ("/usr/share/dict/brazilian", "r") ;
-	if(!dicionario) {
-		perror("Arquivo nao aberto: "); //saber se dicionario foi aberto
-		exit(1);
-	}	
-	char palavra[50];
+	// if(!dicionario) {
+	// 	perror("Arquivo nao aberto: "); //saber se dicionario foi aberto
+	// 	exit(1);
+	// }	
+	// char palavra[50];
 	int numElem=0;
 	c=getc(dicionario);
 	while(!feof(dicionario)) { //calcula numero de caracteres do dicionario
@@ -36,52 +41,56 @@ int main()
 		c=getc(dicionario);
 	}
 
-	c = getc(stdin);
-	while (!feof(stdin) ) //enquanto c for diferente de EOF (usar EOF não esta permitindo sair do while :/)
-	{
-		while((ehsimbolo()) && (!feof(stdin))){ //enquanto o charactere lido for simbolo vai imprimindo
-			putchar(c);
-			c=getc(stdin);
-		}
+	// c = getc(stdin);
+	// while (!feof(stdin) ) //enquanto c for diferente de EOF (usar EOF não esta permitindo sair do while :/)
+	// {
+	// 	while((ehsimbolo()) && (!feof(stdin))){ //enquanto o charactere lido for simbolo vai imprimindo
+	// 		putchar(c);
+	// 		c=getc(stdin);
+	// 	}
 
-		int i=0; 
-		while((ehletra()) && (!feof(stdin) )){ //quando ler uma letra vai adicionando ela no vetor palavra até encontrar um simbolo
-			palavra[i]=c;
-			i++;
-			c=getc(stdin);
+	// 	int i=0; 
+	// 	while((ehletra()) && (!feof(stdin) )){ //quando ler uma letra vai adicionando ela no vetor palavra até encontrar um simbolo
+	// 		palavra[i]=c;
+	// 		i++;
+	// 		c=getc(stdin);
+	// 	}
+		
+	// 	palavra[i]='\0'; //quando encontrar um simbolo sinaliza o final da palavra
+		
+	// 	if(1/*existe*/) printf("%s",palavra ); else printf("[%s]",palavra );
+	// }
+
+
+	char dici[5000000];                      // passa o dicionario para um vetor
+	int j=0;
+	for (int i = 0; i < 5000000; ++i)
+	{
+		dici[i]='0';
+	}
+	c = getc(dicionario);
+	while (!feof(dicionario)){
+		dici[j]=c;
+		j++;
+		c = getc(dicionario);
+	}
+	for (int i = 0; i < j; ++i)
+	{
+		if (dici[i]=='\n')
+		{
+			dici[i]='\0';
 		}
-		
-		palavra[i]='\0'; //quando encontrar um simbolo sinaliza o final da palavra
-		
-		if(1/*existe*/) printf("%s",palavra ); else printf("[%s]",palavra );
+		printf("%c",(dici[i]));
 	}
 
 
-	// char dici[5000000];                      // passa o dicionario para um vetor
-	// int j=0;
-	// for (int i = 0; i < 5000000; ++i)
-	// {
-	// 	dici[i]='0';
-	// }
-	// c = getc(dicionario);
-	// while (!feof(dicionario)){
-	// 	dici[j]=c;
-	// 	j++;
-	// 	c = getc(dicionario);
-	// }
-	// for (int i = 0; i < j; ++i)
-	// {
-	// 	printf("%c",(dici[i]));
-	// }
-
-
-	// char strvalues[][20] = {"verme","example","strings","here"};
-	// qsort (strvalues, 4, 20, (int(*)(const void*,const void*)) strcmp);
-	// char *existe;
-	// char palavra[20]= "verme";
-	// existe = (char*)bsearch( palavra,strvalues,4,20,(int(*)(const void*,const void*)) strcmp);
-	// printf("%p\n",existe);
-	// printf("%s\n",existe);
+	//char strvalues[][20] = {"verme","example","strings","here"};
+	//qsort (strvalues, 4, 20, (int(*)(const void*,const void*)) strcmp);
+	char *existe;
+	char palavra[20]= "verme";
+	existe = (char*)bsearch( palavra,dicionario,4,271001,(int(*)(const void*,const void*)) compareints);
+	printf("%p\n",existe);
+	printf("%s\n",existe);
 
 	return 0;
 }
