@@ -46,10 +46,10 @@ int main()
 
 	char vetorDici[numPala*20];
 	fseek (dicionario,  0, SEEK_SET) ;
-	c=getc(dicionario); 
 	int preencherPalavra=0;
 	int j = 0;
 	
+	c=getc(dicionario); 
 	while ( j < numPala*20 ) //passar dicionario para um vetor para tentar usar o bsearch ;/
 	{
 		if (preencherPalavra==1)
@@ -72,6 +72,16 @@ int main()
 				}
 		++j;
 	}
+
+
+
+	
+
+	char *existe;
+	char palavra[20]= "Abadiânia";
+	existe = (char*)bsearch( palavra,vetorDici,4,20, (int(*)(const void*,const void*)) compareints);
+	printf("%p\n",existe);
+	printf("%s\n",existe);
 
 	// c = getc(stdin);
 	// while (!feof(stdin) ) //enquanto c for diferente de EOF (usar EOF não esta permitindo sair do while :/)
