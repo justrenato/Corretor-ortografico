@@ -77,31 +77,31 @@ int main()
 
 	
 
-	char *existe;
-	char palavra[20]= "Abadiânia";
-	existe = (char*)bsearch( palavra,vetorDici,4,20, (int(*)(const void*,const void*)) compareints);
-	printf("%p\n",existe);
-	printf("%s\n",existe);
+	// char *existe;
+	// char palavra[20]= "Abadiânia";
+	// existe = (char*)bsearch( palavra,vetorDici,4,20, (int(*)(const void*,const void*)) compareints);
+	// printf("%p\n",existe);
+	// printf("%s\n",existe);
 
-	// c = getc(stdin);
-	// while (!feof(stdin) ) //enquanto c for diferente de EOF (usar EOF não esta permitindo sair do while :/)
-	// {
-	// 	while((ehsimbolo()) && (!feof(stdin))){ //enquanto o charactere lido for simbolo vai imprimindo
-	// 		putchar(c);
-	// 		c=getc(stdin);
-	// 	}
+	c = getc(stdin);
+	while (!feof(stdin) ) //enquanto c for diferente de EOF (usar EOF não esta permitindo sair do while :/)
+	{
+		while((ehsimbolo()) && (!feof(stdin))){ //enquanto o charactere lido for simbolo vai imprimindo
+			putchar(c);
+			c=getc(stdin);
+		}
 
-	// 	int i=0; 
-	// 	while((ehletra()) && (!feof(stdin) )){ //quando ler uma letra vai adicionando ela no vetor palavra até encontrar um simbolo
-	// 		palavra[i]=c;
-	// 		i++;
-	// 		c=getc(stdin);
-	// 	}
+		int i=0; 
+		while((ehletra()) && (!feof(stdin) )){ //quando ler uma letra vai adicionando ela no vetor palavra até encontrar um simbolo
+			palavra[i]=c;
+			i++;
+			c=getc(stdin);
+		}
 		
-	// 	palavra[i]='\0'; //quando encontrar um simbolo sinaliza o final da palavra
+		palavra[i]='\0'; //quando encontrar um simbolo sinaliza o final da palavra
 		
-	// 	if(1/*existe*/) printf("%s",palavra ); else printf("[%s]",palavra );
-	// }
+		if(1/*existe*/) printf("%s",palavra ); else printf("[%s]",palavra );
+	}
 
 
 	// char dici[][20]={""};                      // passa o dicionario para um vetor
