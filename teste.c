@@ -1,29 +1,20 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h> // preciso de strcmp
 
 #define NONE -1
+#define LIN 275503
+#define COL 25
+#define string char *
 
-typedef char * string;
+unsigned char c; // se usar apenas char, nao identifica letras acentuadas :(
+char * palavra = "abacate";
 
-// A fun��o BinarySearch recebe uma cadeia de caracteres key e 
-// um vetor array[low,high] de cadeias de caracteres cujos 
-// elementos est�o em ordem lexicogr�fica (ordem de dicion�rio). 
-// A fun��o devolve um �ndice de um elemento de array que seja
-// igual a key. Se tal �ndice n�o existe, a fun��o devolve 
-// NONE.
-
-
-char * lista[]={""};
+// char * lista[]={""};
 // char   lista[][10]={"abacate","banana","danone"};
 // char   lista[]={ 'a','b','a','c','a','t','e','\0','b','a','n','a','n','a','\0','d','a','n','o','n','e','\0'};
 
-
-
-
-char * palavra = "abacate";
-int BinarySearch( string key, string array[], int low, int high) 
+int BinarySearch( string key, char **array, int low, int high) 
 {
    int mid, cmp;
 
@@ -40,17 +31,36 @@ int BinarySearch( string key, string array[], int low, int high)
 
 int main(int argc, char const *argv[])
 {
-  FILE *dicionario;
-  dicionario = fopen("/usr/share/dict/brazilian","r");
-  printf("%d\n",BinarySearch(palavra,lista,0,2));
+	FILE *dicionario;
+	dicionario = fopen ("/usr/share/dict/brazilian", "r") ;
+	if(!dicionario) {
+		perror("Arquivo nao aberto: "); //saber se dicionario foi aberto
+		exit(1);
+	}	
 
- for (int i = 0; i < 275503; ++i)
-  {
-    fgets (&lista[i],100, stdin) ;
-  }
+	int numElem=0,numPala=0;
+	char **mat;
+	int i, j ;
+	char aux[20];
+	// aloca um vetor de LIN ponteiros para linhas
+	mat = malloc (LIN * sizeof (int*)) ;
 
-   
+	// aloca um vetor com todos os elementos da matriz
+	mat[0] = malloc (LIN * COL * sizeof (int)) ;	
+
+	// ajusta os demais ponteiros de linhas (i > 0)
+	for (i=1; i < LIN; i++){
+	  mat[i] = mat[0] + i * COL ;
+	}
+		
+	// percorre a matriz
+	for (i=0; i < LIN; i++){
+		fgets(mat[i],COL,dicionario ) ;
+		//fputs(mat[i]);
+	}
+		//printf("%s\n",mat[1] );
 
 
-  return 0;
+	printf("%d\n",BinarySearch(palavra,mat,0,LIN));
+	return 0;
 }
