@@ -8,7 +8,7 @@
 #define string char *
 
 unsigned char c; // se usar apenas char, nao identifica letras acentuadas :(
-char * palavra = "abacate";
+char * palavra = {"abacate"};
 
 // char * lista[]={""};
 // char   lista[][10]={"abacate","banana","danone"};
@@ -56,7 +56,7 @@ int main(int argc, char const *argv[])
 	// percorre a matriz
 	for (i=0; i < LIN; i++){
 		fgets(mat[i],COL,dicionario ) ;
-		//fputs(mat[i]);
+		//printf("%s\n",mat[i] );
 	}
 		//printf("%s\n",mat[1] );
 
